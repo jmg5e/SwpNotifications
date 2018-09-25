@@ -1,0 +1,23 @@
+{
+  "locations": [
+    {
+      "Moniker": "600",
+      "Floor": "pr1",
+      "Products": [
+        {"Name": "7pk Sprite", "Slot": "1a"},
+        {"Name": "7pk Coke", "Slot": "1b"}
+      ]
+    },
+    {
+      "Moniker": "800",
+      "Floor": "pr2",
+      "Products": [
+        {"Name": "2Liter Sprite", "Slot": "1"},
+        {"Name": "2Liter Coke", "Slot": "2"}
+      ]
+    }
+  ],
+  "users": [
+      { "userName": "user", "password": "Passw0rd!", "email": "user@email.com", "hubGroups": ["RequestListener", "ClientListener"] }
+  ]
+}

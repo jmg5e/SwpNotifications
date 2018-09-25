@@ -1,0 +1,26 @@
+{
+  "locations": [
+    {
+      "Id": 1,
+      "Moniker": "Loc1",
+      "Floor": "Floor1",
+      "Products": [
+        {"Id": 1, "Name": "Product1", "Slot": "1a"},
+        {"Id": 2, "Name": "Product2", "Slot": "1b"}
+      ]
+    },
+    {
+      "Id": 2,
+      "Moniker": "Loc2",
+      "Floor": "Floor2",
+      "Products": [
+        {"Id": 3, "Name": "Product3", "Slot": "1"},
+        {"Id": 4, "Name": "Product4", "Slot": "2"},
+        {"Id": 5, "Name": "Product5", "Slot": "2"}
+      ]
+    }
+  ],
+  "users": [
+      { "userName": "user", "password": "Passw0rd!" }
+  ]
+}

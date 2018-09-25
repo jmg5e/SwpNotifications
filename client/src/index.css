@@ -1,0 +1,14 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #F4F6F9; 
+    /* $lightGrey; */
+}
+
+/* https://github.com/Semantic-Org/Semantic-UI-React/issues/2558 */
+.ui.page.modals.transition.visible {
+    display: flex !important;
+}
