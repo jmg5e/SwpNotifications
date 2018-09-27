@@ -18,12 +18,14 @@ const FormField = ({
 
   return (
     <Form.Field error={hasError}>
-      <Label>{label}</Label>
-      {hasError && (
+      <div style={{ display: 'flex', alignItems: 'center', paddingBottom: 5 }}>
+        <Label>{label}</Label>
+        {hasError && (
         <Label color="red" pointing="left">
           {error}
         </Label>
-      )}
+        )}
+      </div>
       <As
         {...props}
         {...input}
