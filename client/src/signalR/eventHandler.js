@@ -1,5 +1,5 @@
 import { bindActionCreators } from 'redux';
-import { disconnected } from 'features/connection/actions';
+import { connectionClosed } from 'connection/actions';
 import EventActions from './eventActions';
 
 /* register events with hub */
@@ -13,7 +13,7 @@ export default (hub, store) => {
   });
 
   /* TODO include this in event actions(bind onclose to on?) */
-  hub.onclose(() => dispatch(disconnected()));
+  hub.onclose(() => dispatch(connectionClosed()));
 };
 
 /* event -> transformation? -> action  */

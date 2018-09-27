@@ -1,6 +1,6 @@
 import { HubConnectionBuilder, LogLevel } from '@aspnet/signalr';
 import { validateSignalrAction } from 'utils/validateActions';
-import * as connectionActions from 'features/connection/actions';
+import * as connectionActions from 'connection/actions';
 import {
   signalrError,
 } from 'signalR/actions';
@@ -18,7 +18,6 @@ export default (function signalrMiddleware() {
     switch (action.type) {
       case Types.SIGNALR_CONNECT:
       case AuthTypes.LOGIN_SUCCESS:
-      case AuthTypes.LOGOUT:
         try {
           if (hub !== null) {
             await hub.stop();
@@ -26,7 +25,7 @@ export default (function signalrMiddleware() {
           const { server } = getState().settings;
 
           dispatch(connectionActions.connecting());
-          const queryIdentifier = action.user ? `?clientIdentifier=${action.user}` : '';
+          const queryIdentifier = action.clientIdentifier ? `?clientIdentifier=${action.clientIdentifier}` : '';
           hub = new HubConnectionBuilder()
             .withUrl(`${server}/SwpHub${queryIdentifier}`, {
               accessTokenFactory: () => getAccessToken(store),
@@ -37,26 +36,25 @@ export default (function signalrMiddleware() {
           eventHandler(hub, store);
           await hub.start();
 
-          const connectionId = await hub.invoke('GetConnectionId');
-          dispatch(connectionActions.connectionSuccess(connectionId));
+          const connectedClient = await hub.invoke('GetCurrentClient');
+          dispatch(connectionActions.connectionSuccess(connectedClient));
         } catch (err) {
           dispatch(connectionActions.connectionFailed(err.message));
         }
         break;
+      case AuthTypes.LOGOUT:
       case Types.SIGNALR_DISCONNECT:
         if (hub !== null) {
           hub.stop();
         }
-        dispatch(connectionActions.disconnected());
         break;
       case Types.SIGNALR:
         try {
           validateSignalrAction(action);
           const { method, success, args = [] } = action;
 
-          // await hub.invoke(method, payload, 'hello');
           const result = await hub.invoke(method, ...args);
-          // console.log(result);
+
           if (typeof success === 'function') {
             dispatch(success(result));
           }

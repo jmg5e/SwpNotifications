@@ -1,6 +1,6 @@
 // import Types from 'features/connection/types';
-import connectionReducer, { initialState } from 'features/connection/reducer';
-import * as actions from 'features/connection/actions';
+import connectionReducer, { initialState } from 'connection/reducer';
+import * as actions from 'connection/actions';
 
 describe('Connection Reducer', () => {
   it('should have correct initial state', () => {
@@ -16,16 +16,24 @@ describe('Connection Reducer', () => {
 
   it('connectionSuccess should return correct state', () => {
     expect(
-      connectionReducer(undefined, actions.connectionSuccess('id123')),
+      connectionReducer(
+        undefined,
+        actions.connectionSuccess({ id: '123', identifier: 'joe' }),
+      ),
     ).toEqual({
-      connected: true, connecting: false, connectionId: 'id123', errorMessage: '',
+      connected: true,
+      connecting: false,
+      client: { id: '123', identifier: 'joe' },
+      errorMessage: '',
     });
   });
 
   it('connectionFailed should return correct state with given error message', () => {
     expect(
-      connectionReducer(undefined,
-        actions.connectionFailed('something went wrong')),
+      connectionReducer(
+        undefined,
+        actions.connectionFailed('something went wrong'),
+      ),
     ).toEqual({
       ...initialState,
       errorMessage: 'something went wrong',
@@ -33,9 +41,7 @@ describe('Connection Reducer', () => {
   });
 
   it('connectionFailed should return correct state with default error message', () => {
-    expect(
-      connectionReducer(undefined, actions.connectionFailed()),
-    ).toEqual({
+    expect(connectionReducer(undefined, actions.connectionFailed())).toEqual({
       ...initialState,
       errorMessage: 'Connection Failed.',
     });
@@ -43,10 +49,13 @@ describe('Connection Reducer', () => {
 
   it('disconnected should return correct state', () => {
     expect(
-      connectionReducer({
-        connected: true,
-        connectionId: '123',
-      }, actions.disconnected()),
+      connectionReducer(
+        {
+          connected: true,
+          client: { id: '123', identifier: 'joe' },
+        },
+        actions.connectionClosed(),
+      ),
     ).toEqual(initialState);
   });
 });

@@ -4,35 +4,12 @@ import { connect } from 'react-redux';
 import { connectToHub } from 'signalR/actions';
 import ConnectPage from './components/ConnectPage';
 
-class Connect extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      name: '',
-    };
-  }
-
-  handleNameChange = ({ target: { value } }) => {
-    this.setState({
-      name: value,
-    });
-  };
-
-  connect = () => {
-    this.props.connectToHub(this.state.name);
-  }
-
-  render() {
-    return (
-      <ConnectPage
-        {...this.props.connection}
-        connectToHub={this.connect}
-        name={this.state.name}
-        handleNameChange={this.handleNameChange}
-      />
-    );
-  }
-}
+const Connect = props => (
+  <ConnectPage
+    connectToHub={props.connectToHub}
+    {...props.connection}
+  />
+);
 
 Connect.propTypes = {
   connectToHub: PropTypes.func.isRequired,

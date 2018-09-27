@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import AppRoutes from 'routes';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-// import Disconnected from 'features/connection/Disconnected';
 import { Loader } from 'semantic-ui-react';
 import ReduxToastr from 'react-redux-toastr';
 import {
@@ -20,13 +19,6 @@ class App extends Component {
     super(props);
     this.state = { sideMenuIsOpen: false };
   }
-
-  // componentDidMount() {
-  //   if (!this.props.connected && !this.props.connecting) {
-  //     // this.props.push('/disconnected');
-  //   }
-  //   // this.props.connectToHub();
-  // }
 
   toggleSidebar = () => {
     this.setState(state => ({ sideMenuIsOpen: !state.sideMenuIsOpen }));
@@ -48,8 +40,8 @@ class App extends Component {
         />
         <Content onClick={this.closeSideBar}>
           <AppRoutes />
+          <Loader size="huge" active={this.props.loading} />
         </Content>
-        <Loader size="huge" active={this.props.loading} />
         <ReduxToastr
           newestOnTop
           timeOut={4000}
@@ -65,7 +57,6 @@ class App extends Component {
 
 App.propTypes = {
   disconnect: PropTypes.func.isRequired,
-  connected: PropTypes.bool.isRequired,
   requestCount: PropTypes.number.isRequired,
   messageCount: PropTypes.number.isRequired,
   loading: PropTypes.bool.isRequired,

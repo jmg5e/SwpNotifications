@@ -8,9 +8,9 @@ export const signalrError = (label, errorMessage) => ({
   errorMessage,
 });
 
-export const connectToHub = user => ({
+export const connectToHub = name => ({
   type: Types.SIGNALR_CONNECT,
-  user,
+  clientIdentifier: name,
 });
 
 export const disconnect = () => ({

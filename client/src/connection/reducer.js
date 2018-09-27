@@ -4,7 +4,7 @@ export const initialState = {
   connected: false,
   connecting: false,
   errorMessage: '',
-  connectionId: null,
+  client: null,
 };
 
 const defaultErrorMessage = 'Connection Failed.';
@@ -17,7 +17,7 @@ const connectionReducer = (state = initialState, action) => {
       return {
         ...initialState,
         connected: true,
-        connectionId: action.connectionId,
+        client: action.client,
       };
     case Types.CONNECTION_FAILED:
       return {

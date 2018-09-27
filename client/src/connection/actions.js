@@ -4,9 +4,9 @@ export const connecting = () => ({
   type: Types.CONNECTING,
 });
 
-export const connectionSuccess = connectionId => ({
+export const connectionSuccess = client => ({
   type: Types.CONNECTION_SUCCEEDED,
-  connectionId,
+  client,
 });
 
 export const connectionFailed = errorMessage => ({
@@ -14,6 +14,6 @@ export const connectionFailed = errorMessage => ({
   errorMessage,
 });
 
-export const disconnected = () => ({
+export const connectionClosed = () => ({
   type: Types.CONNECTION_CLOSED,
 });

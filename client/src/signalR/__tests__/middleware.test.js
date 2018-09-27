@@ -1,7 +1,7 @@
 import configureMockStore from 'redux-mock-store';
 import signalrMiddleware from 'signalR/middleware';
 import { signalrError, connectToHub, disconnect } from 'signalR/actions';
-import * as connectionActions from 'features/connection/actions';
+import * as connectionActions from 'connection/actions';
 import eventHandler from 'signalR/eventHandler';
 import {
   MockedHubConnection,
@@ -22,7 +22,8 @@ describe('SignalR Middleware', () => {
     const store = mockStore({ settings: { server: '192.168.2.1:3000' } });
     await store.dispatch(connectToHub());
     expect(MockedHubConnectionBuilder.withUrl).toBeCalledWith(
-      '192.168.2.1:3000/SwpHub', expect.any(Object),
+      '192.168.2.1:3000/SwpHub',
+      expect.any(Object),
     );
   });
 
@@ -30,7 +31,8 @@ describe('SignalR Middleware', () => {
     const store = mockStore({ settings: { server: '192.168.2.1:3000' } });
     await store.dispatch(connectToHub('steve'));
     expect(MockedHubConnectionBuilder.withUrl).toBeCalledWith(
-      '192.168.2.1:3000/SwpHub?clientIdentifier=steve', expect.any(Object),
+      '192.168.2.1:3000/SwpHub?clientIdentifier=steve',
+      expect.any(Object),
     );
   });
 
@@ -39,14 +41,18 @@ describe('SignalR Middleware', () => {
     MockedHubConnection.invoke = jest.fn();
     const store = mockStore({ settings: { server: '192.168.2.1:3000' } });
     await store.dispatch(connectToHub());
-    // expect(store.getActions()).toEqual([
-    expect(store.getActions()).toEqual(expect.arrayContaining([
-      connectToHub(),
-      connectionActions.connecting(),
-      connectionActions.connectionSuccess(),
-    ]));
+    expect(store.getActions()).toEqual(
+      expect.arrayContaining([
+        connectToHub(),
+        connectionActions.connecting(),
+        connectionActions.connectionSuccess(),
+      ]),
+    );
 
-    expect(eventHandler).toBeCalledWith(MockedHubConnection, expect.any(Object));
+    expect(eventHandler).toBeCalledWith(
+      MockedHubConnection,
+      expect.any(Object),
+    );
   });
 
   it('Hub connection failed should call connectionFailed', async () => {
@@ -54,11 +60,13 @@ describe('SignalR Middleware', () => {
 
     const store = mockStore({ settings: { server: '' } });
     await store.dispatch(connectToHub());
-    expect(store.getActions()).toEqual(expect.arrayContaining([
-      connectToHub(),
-      connectionActions.connecting(),
-      connectionActions.connectionFailed('something went wrong'),
-    ]));
+    expect(store.getActions()).toEqual(
+      expect.arrayContaining([
+        connectToHub(),
+        connectionActions.connecting(),
+        connectionActions.connectionFailed('something went wrong'),
+      ]),
+    );
   });
 
   it('disconnect should stop hub', async () => {
