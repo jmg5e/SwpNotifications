@@ -22,8 +22,10 @@ namespace SwpNotifications.Api {
         public void ConfigureServices(IServiceCollection services) {
             services.ConfigureCors();
             services.ConfigureAutomapper();
-            // services.ConfigureInMemoryDb();
-            services.ConfigureDataStore(Configuration);
+
+            services.ConfigureInMemoryDb();
+            // services.ConfigureDataStore(Configuration);
+
             services.ConfigureIdentity();
             services.ConfigureAuth(Configuration);
             services.ConfigureLogging();

@@ -38,10 +38,11 @@ namespace SwpNotifications.Api.SignalR {
         }
 
         public override async Task OnDisconnectedAsync(Exception exception) {
-            await base.OnDisconnectedAsync(exception);
-
             var disconnectedClient = _clientManager.GetClient(Context.ConnectionId);
             _clientManager.DeleteClient(Context.ConnectionId);
+            Console.WriteLine($"Client disconnected: ${disconnectedClient.Identifier}");
+            await base.OnDisconnectedAsync(exception);
+
             await Clients.Group("ClientListener").SendAsync("ClientDisconnected", disconnectedClient);
         }
 
@@ -66,8 +67,8 @@ namespace SwpNotifications.Api.SignalR {
             }
         }
 
-        public string GetConnectionId() {
-            return Context.ConnectionId;
+        public Client GetCurrentClient() {
+            return _clientManager.GetClient(Context.ConnectionId);
         }
 
         [Authorize(Policy = "ClientListener")]
