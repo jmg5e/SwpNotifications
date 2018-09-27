@@ -1,5 +1,5 @@
 import auth from 'auth/reducer';
-import connection from 'features/connection/reducer';
+import connection from 'connection/reducer';
 import settings from 'features/settings/reducer';
 import products from 'features/products/reducer';
 import locations from 'features/locations/reducer';

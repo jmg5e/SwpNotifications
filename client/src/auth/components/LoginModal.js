@@ -5,6 +5,7 @@ import {
 import PropTypes from 'prop-types';
 import LoginForm from './LoginForm';
 
+/* move modal state to redux store? */
 class LoginModal extends Component {
   state = {
     open: false,
@@ -12,7 +13,10 @@ class LoginModal extends Component {
 
   open = () => this.setState({ open: true });
 
-  close = () => this.setState({ open: false });
+  close = () => {
+    this.props.clearError();
+    this.setState({ open: false });
+  };
 
   render() {
     const Trigger = this.props.renderTrigger;
@@ -41,10 +45,10 @@ LoginModal.defaultProps = {
 
 
 LoginModal.propTypes = {
-  // trigger: PropTypes.node.isRequired,
   renderTrigger: PropTypes.func,
   errorMessage: PropTypes.string,
   login: PropTypes.func.isRequired,
+  clearError: PropTypes.func.isRequired,
   authenticating: PropTypes.bool.isRequired,
 };
 

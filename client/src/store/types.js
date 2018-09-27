@@ -1,6 +1,6 @@
 import auth from 'auth/types';
+import connection from 'connection/types';
 import clients from 'features/clients/types';
-import connection from 'features/connection/types';
 import locations from 'features/locations/types';
 import products from 'features/products/types';
 import requests from 'features/requests/types';

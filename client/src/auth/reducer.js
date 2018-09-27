@@ -25,6 +25,11 @@ const authReducer = (state = initialState, action) => {
         ...initialState,
         errorMessage: action.errorMessage,
       };
+    case Types.CLEAR_LOGIN_ERROR:
+      return {
+        ...state,
+        errorMessage: '',
+      };
     case Types.LOGOUT:
     case Types.TOKEN_RENEW_FAILED:
       return initialState;

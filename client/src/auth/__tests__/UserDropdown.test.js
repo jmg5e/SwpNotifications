@@ -11,7 +11,7 @@ describe('UserDropdown', () => {
     };
     const loginfunc = jest.fn();
     const wrapper = mount(
-      <UserDropdown {...props} login={loginfunc} logout={jest.fn()} />,
+      <UserDropdown {...props} login={loginfunc} logout={jest.fn()} clearError={jest.fn()} />,
     );
 
     expect(wrapper.text()).toEqual('Login');
@@ -26,7 +26,7 @@ describe('UserDropdown', () => {
     };
     const logoutfunc = jest.fn();
     const wrapper = mount(
-      <UserDropdown {...props} login={jest.fn()} logout={logoutfunc} />,
+      <UserDropdown {...props} login={jest.fn()} logout={logoutfunc} clearError={jest.fn()} />,
     );
     expect(wrapper.text()).toEqual('userLogout');
   });

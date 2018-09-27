@@ -32,6 +32,24 @@ describe('Authentication Reducer', () => {
     });
   });
 
+  it('clearError should return correct state', () => {
+    const state = {
+      authenticated: false,
+      authenticating: false,
+      errorMessage: 'some error',
+      user: null,
+    };
+
+    const newState = authReducer(state, actions.clearError());
+
+    expect(newState).toEqual({
+      authenticated: false,
+      authenticating: false,
+      errorMessage: '',
+      user: null,
+    });
+  });
+
   it('loginFailed should return correct state', () => {
     const newState = authReducer(undefined, actions.loginFailed('some error'));
     expect(newState).toEqual({

@@ -10,6 +10,7 @@ const UserDropdown = ({
   login,
   logout,
   errorMessage,
+  clearError,
 }) => (authenticated ? (
   <Dropdown icon="dropdown" pointing="top right" text={user.userName}>
     <Dropdown.Menu>
@@ -23,6 +24,7 @@ const UserDropdown = ({
         authenticating={authenticating}
         errorMessage={errorMessage}
         login={login}
+        clearError={clearError}
         renderTrigger={triggerProps => (
           <Dropdown.Item icon="user" text="Login" {...triggerProps} />
         )}
@@ -39,6 +41,7 @@ UserDropdown.propTypes = {
   authenticating: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
+  clearError: PropTypes.func.isRequired,
   user: PropTypes.shape({
     userName: PropTypes.string,
     isAdmin: PropTypes.bool,

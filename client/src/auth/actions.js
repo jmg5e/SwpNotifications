@@ -10,6 +10,10 @@ export const loginFailed = (errorMessage = 'Login Failed') => ({
   errorMessage,
 });
 
+export const clearError = () => ({
+  type: Types.CLEAR_LOGIN_ERROR,
+});
+
 export const logout = () => ({
   type: Types.LOGOUT,
 });
