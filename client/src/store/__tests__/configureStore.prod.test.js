@@ -49,7 +49,7 @@ describe('configure redux store : production', () => {
   it('applys correct middleware - production', () => {
     configureStore();
     const middlewares = applyMiddleware.mock.calls[0];
-    expect(middlewares.length).toEqual(4);
+    expect(middlewares.length).toEqual(5);
     // array of functions
     expect(middlewares).toEqual(expect.arrayContaining([
       apiMiddleware,
