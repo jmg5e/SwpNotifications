@@ -8,6 +8,7 @@ namespace SwpNotifications.Data.Services
         IEnumerable<Location> GetLocations();
         IEnumerable<Location> GetLocationsWithProducts();
         Location GetLocationById(int id);
+        Location GetLocationByMoniker(string moniker);
         Location GetLocationWithProductsById(int id);
         bool LocationExsists(int id);
         bool LocationWithMonikerExsists(string moniker);

@@ -5,7 +5,6 @@ using SwpNotifications.Data.Services;
 using SwpNotifications.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using SwpNotifications.Api.Models;
-using System;
 
 namespace SwpNotifications.Api.Controllers
 {
@@ -71,19 +70,21 @@ namespace SwpNotifications.Api.Controllers
 
             var locationToAdd = _mapper.Map<Location>(location); 
             _inventoryRepository.AddLocation(locationToAdd);
-            Console.WriteLine(locationToAdd.Moniker);
+
 
             if (!_inventoryRepository.Save())
             {
                 return StatusCode(500, $"Create location failed on save.");
             }
 
-            return Created($"api/locations/{locationToAdd.Id}", location);
+            var createdLocation = _inventoryRepository.GetLocationByMoniker(locationToAdd.Moniker);
+
+            return Created($"api/locations/{createdLocation.Id}", _mapper.Map<LocationDto>(createdLocation));
             // TODO why this doesnt work?
-            // return CreatedAtRoute("GetLocation", new { moniker = locationToAdd.Moniker }, locationToAdd);
+            // return CreatedAtRoute("GetLocation", new { moniker = locationToAdd.Moniker }, createdLocation);
         }
 
-        // TODO Authorize for only role = Admin
+        // TODO only allow Admin?
         // TODO handle how products are deleted
         [HttpDelete("{id}")]
         public IActionResult DeleteLocation(int id)
@@ -119,58 +120,46 @@ namespace SwpNotifications.Api.Controllers
             }
 
             var locationToUpdate = _inventoryRepository.GetLocationById(id);
-            // if( locationToUpdate.Moniker != location.Moniker )
-            // {
-            //     if( _inventoryRepository.LocationWithMonikerExsists(location.Moniker))
-            //         return BadRequest($"Location with moniker {location.Moniker} already exists");
-            //         locationToUpdate = new Location() {
-            //             Id = locationToUpdate.Id,
-            //             Moniker = location.Moniker,
-            //             Floor = location.Floor,
-            //             Products = locationToUpdate.Products
-            //         };
-            // } else {
-                locationToUpdate.Floor = location.Floor;
-                locationToUpdate.Moniker = location.Moniker;
-            // }
+            locationToUpdate.Floor = location.Floor;
+            locationToUpdate.Moniker = location.Moniker;
 
             if (!_inventoryRepository.Save())
             {
-                return StatusCode(500, $"Update location {id} failed on save.");
+                return StatusCode(500, $"Update location:{id} failed.");
             }
 
             return NoContent();
         }
 
         /* TODO revisit this */
-        [HttpPost("{id}")]
-        public IActionResult AddProductToLocation(int id,
-                [FromBody] ProductDto product)
-        {
-            if (product == null)
-            {
-                return BadRequest();
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (!_inventoryRepository.LocationExsists(id))
-            {
-                return NotFound("location does not exist");
-            }
-
-            var productToAdd = _mapper.Map<Product>(product);
-
-            if (!_inventoryRepository.Save())
-            {
-                return StatusCode(500, $"Add Product {product.Id} to Location {id} failed on save.");
-            }
-
-            // var createdProduct = _mapper.Map<Models.ProductDto>(productToAdd);
-            return Ok();
-        }
+        // [HttpPost("{id}")]
+        // public IActionResult AddProductToLocation(int id,
+        //         [FromBody] ProductDto product)
+        // {
+        //     if (product == null)
+        //     {
+        //         return BadRequest();
+        //     }
+        //
+        //     if (!ModelState.IsValid)
+        //     {
+        //         return BadRequest(ModelState);
+        //     }
+        //
+        //     if (!_inventoryRepository.LocationExsists(id))
+        //     {
+        //         return NotFound("location does not exist");
+        //     }
+        //
+        //     var productToAdd = _mapper.Map<Product>(product);
+        //
+        //     if (!_inventoryRepository.Save())
+        //     {
+        //         return StatusCode(500, $"Add Product {product.Id} to Location {id} failed on save.");
+        //     }
+        //
+        //     // var createdProduct = _mapper.Map<Models.ProductDto>(productToAdd);
+        //     return Ok();
+        // }
     }
 }
