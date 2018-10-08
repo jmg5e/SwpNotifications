@@ -10,7 +10,6 @@ import { connect } from 'react-redux';
 import ProductsPage from './components/ProductsPage';
 import products from './selectors';
 
-
 class Products extends Component {
   state = {
     searchValue: '',
@@ -21,13 +20,23 @@ class Products extends Component {
     if (this.props.products.length === 0) this.props.getProducts();
   }
 
+  confirmProductRequest = (product) => {
+    this.props.confirm(
+      () => this.props.requestProduct(product.id),
+      `Send restock request for product: ${product.name}?`,
+    );
+  };
+
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
   confirmProductDelete = (id) => {
-    this.props.confirm(() => this.props.deleteProduct(id), `Are You Sure you want to Delete Product:${id}`);
-  }
+    this.props.confirm(
+      () => this.props.deleteProduct(id),
+      `Are You Sure you want to Delete Product:${id}`,
+    );
+  };
 
   goToProductPage = (product) => {
     this.props.push(`/products/${product.id}`);
@@ -46,7 +55,7 @@ class Products extends Component {
         goToCreateProductPage={this.goToCreateProductPage}
         getProducts={this.props.getProducts}
         locations={this.props.locations}
-        requestProduct={this.props.requestProduct}
+        requestProduct={this.confirmProductRequest}
         deleteProduct={this.confirmProductDelete}
         products={this.props.products
           .filter(filterItemByValue(this.state.locationSelect, 'location'))

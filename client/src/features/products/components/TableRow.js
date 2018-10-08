@@ -8,7 +8,7 @@ const TableRow = ({
 }) => (
   <Table.Row key={`tr-${product.id}`}>
     <Table.Cell collapsing>
-      <Button icon="alarm" onClick={() => requestProduct(product.id)} />
+      <Button icon="alarm" onClick={() => requestProduct(product)} />
     </Table.Cell>
     <Table.Cell>{product.name}</Table.Cell>
     <Table.Cell>{product.location}</Table.Cell>
