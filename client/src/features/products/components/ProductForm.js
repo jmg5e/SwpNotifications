@@ -34,6 +34,7 @@ const ProductForm = ({
       type="select"
       value={product.location}
       options={locations.map(loc => ({ text: loc.moniker, value: loc.id }))}
+      validate={[isRequired]}
     />
 
     <Field
