@@ -15,7 +15,7 @@ const TableRow = ({ location, edit }) => (
 
       <Table.Cell
         style={{ textAlign: 'center', verticalAlign: 'center' }}
-        content={<Label as="a" icon="trash" content="delete" color="red" size="small" />}
+        content={<Label as="a" icon="trash" content="delete" color="red" size="small" disabled />}
       />
     </IfAuthenticated>
   </Table.Row>

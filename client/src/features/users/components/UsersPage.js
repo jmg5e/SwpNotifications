@@ -17,7 +17,7 @@ const UsersPage = ({
   deleteUser,
 }) => (
   <Page.Layout>
-    <Page.Header><span>Users</span>
+    <Page.Header><span>Users &amp; Groups</span>
       <RefreshButton onClick={getUsers} icon="refresh" content="refresh" />
       <Button onClick={newUser} icon="add" content="Add User" />
     </Page.Header>
@@ -29,8 +29,11 @@ const UsersPage = ({
 UsersPage.propTypes = {
   users: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      userName: PropTypes.string.isRequired,
+      userName: PropTypes.string,
+      id: PropTypes.string,
+      hubGroups: PropTypes.arrayOf(PropTypes.string.string),
+      isAdmin: PropTypes.bool,
+      isLocked: PropTypes.bool,
     }),
   ).isRequired,
   getUsers: PropTypes.func.isRequired,

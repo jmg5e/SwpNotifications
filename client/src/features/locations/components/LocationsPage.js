@@ -13,7 +13,7 @@ const LocationsPage = props => (
     <Page.TopBar>
       <Button icon="refresh" content="Refresh" onClick={props.getLocations} />
       <IfAuthenticated>
-        <Button onClick={props.goToNewLocation}>New Location</Button>
+        <Button content="New Location" icon="add" onClick={props.goToNewLocation} />
       </IfAuthenticated>
     </Page.TopBar>
     <Page.Main>

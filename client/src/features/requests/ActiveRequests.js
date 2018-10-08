@@ -7,13 +7,10 @@ import {
   clearRequests,
   dismissRequest,
 } from 'signalR/actions';
-import {
-  clearHistory,
-} from './actions';
-import RequestsPage from './components/RequestsPage';
+import ActiveRequests from './components/ActiveRequests';
 import requests from './selectors';
 
-class Requests extends Component {
+class ActiveRequestsContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,28 +41,21 @@ class Requests extends Component {
 
   render() {
     return (
-      <RequestsPage
-        activeRequests={this.state.activeRequests}
-        requestHistory={this.props.requestHistory}
-        dismissRequest={this.props.dismissRequest}
-        getRequests={this.props.getRequests}
+      <ActiveRequests
+        className="ActiveRequests"
+        requests={this.state.activeRequests}
         clearRequests={this.props.clearRequests}
-        clearHistory={this.props.clearHistory}
+        getRequests={this.props.getRequests}
+        dismissRequest={this.props.dismissRequest}
       />
     );
   }
 }
 
-Requests.propTypes = {
+ActiveRequestsContainer.propTypes = {
   getRequests: PropTypes.func.isRequired,
   clearRequests: PropTypes.func.isRequired,
   dismissRequest: PropTypes.func.isRequired,
-  clearHistory: PropTypes.func.isRequired,
-  requestHistory: PropTypes.arrayOf(PropTypes.shape({
-    eventId: PropTypes.string,
-    ids: PropTypes.arrayOf(PropTypes.number),
-    products: PropTypes.arrayOf(PropTypes.object),
-  })).isRequired,
   activeRequests: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -84,16 +74,9 @@ const mapDispatchToProps = {
   getRequests,
   clearRequests,
   dismissRequest,
-  clearHistory,
 };
-// dispatch => ({
-//   getRequests: bindActionCreators(getRequests, dispatch),
-//   clearRequests: bindActionCreators(clearRequests, dispatch),
-//   deledismissest: bindActionCreators(deleteRequest, dispatch),
-//   clearHistory: bindActionCreators(clearHistory, dispatch),
-// });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Requests);
+)(ActiveRequestsContainer);

@@ -29,6 +29,7 @@ IfAuthenticated.defaultProps = {
   requireAdmin: false,
   requiredGroup: null,
   user: null,
+  children: null,
 };
 
 IfAuthenticated.propTypes = {
@@ -40,7 +41,7 @@ IfAuthenticated.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
-  ]).isRequired,
+  ]),
   requireAdmin: PropTypes.bool,
   requiredGroup: PropTypes.string,
   renderElse: PropTypes.func,

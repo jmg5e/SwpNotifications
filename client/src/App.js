@@ -13,6 +13,8 @@ import { disconnect } from 'signalR/actions';
 import { push } from 'react-router-redux';
 import requests from 'features/requests/selectors';
 import messages from 'features/messages/selectors';
+import ConfirmModal from 'features/confirm/ConfirmModal';
+import ErrorBoundry from 'components/ErrorBoundry';
 
 class App extends Component {
   constructor(props) {
@@ -39,8 +41,10 @@ class App extends Component {
           messageCount={this.props.messageCount}
         />
         <Content onClick={this.closeSideBar}>
-          <AppRoutes />
-          <Loader size="huge" active={this.props.loading} />
+          <ErrorBoundry>
+            <AppRoutes />
+            <Loader size="huge" active={this.props.loading} />
+          </ErrorBoundry>
         </Content>
         <ReduxToastr
           newestOnTop
@@ -50,6 +54,7 @@ class App extends Component {
           transitionOut="fadeOut"
           closeOnToastrClick
         />
+        <ConfirmModal />
       </Layout>
     );
   }

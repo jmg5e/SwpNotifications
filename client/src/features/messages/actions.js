@@ -8,3 +8,8 @@ export const messageRecieved = message => ({
 export const deleteMessages = () => ({
   type: types.MESSAGES_DELETED,
 });
+
+export const deleteMessage = id => ({
+  type: types.MESSAGE_DELETED,
+  id,
+});

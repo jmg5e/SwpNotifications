@@ -36,7 +36,6 @@ class Settings extends Component {
         settings={this.props.settings}
         updateSettings={this.props.updateSettings}
         resetSettings={this.props.resetSettings}
-        goBack={this.goBack}
         clearCache={this.clearCache}
       />
     );

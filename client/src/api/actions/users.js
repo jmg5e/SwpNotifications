@@ -26,11 +26,11 @@ export const createUser = user => ({
   },
 });
 
-export const deleteUser = id => ({
+export const deleteUser = user => ({
   type: Types.API_AUTHENTICATED,
   label: 'Delete api/users',
-  endPoint: `/api/users/${id}`,
-  success: () => actions.deleteUserSuccess(id),
+  endPoint: `/api/users/${user.id}`,
+  success: () => actions.deleteUserSuccess(user.id),
   failed: toastrError('Delete User Failed.'),
   requestOptions: {
     method: 'DELETE',

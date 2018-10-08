@@ -1,9 +1,9 @@
-import productsReducer from 'features/products/reducer';
+import productsReducer, { initialState } from 'features/products/reducer';
 import Types from 'features/products/types';
 
 describe('Products Reducer', () => {
   it('should have correct initial state', () => {
-    expect(productsReducer(undefined, {})).toEqual({});
+    expect(productsReducer(undefined, {})).toEqual(initialState);
   });
 
   it('GET_PRODUCTS_SUCCESS should return correct state', () => {

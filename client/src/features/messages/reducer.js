@@ -8,6 +8,8 @@ const messagesReducer = (state = initialState, action) => {
       return [...state, action.message];
     case Types.MESSAGES_DELETED:
       return [];
+    case Types.MESSAGE_DELETED:
+      return state.filter(msg => msg.id !== action.id);
     default:
       return state;
   }

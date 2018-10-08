@@ -1,7 +1,7 @@
 import * as R from 'ramda';
 import Types from './types';
 
-const initialState = {};
+export const initialState = {};
 
 const productsReducer = (state = initialState, action) => {
   switch (action.type) {

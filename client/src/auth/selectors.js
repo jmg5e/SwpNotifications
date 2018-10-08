@@ -5,7 +5,7 @@ export const selectAuth = R.prop('auth');
 
 export default {
   getUser: createSelector([selectAuth], R.prop('user')),
-  getLoggedInUser: createSelector([selectAuth], R.path(['user', 'userName'])),
+  getCurrentUserName: createSelector([selectAuth], R.path(['user', 'userName'])),
   getAccessToken: createSelector(
     [selectAuth], R.path(['user', 'accessToken']),
   ),

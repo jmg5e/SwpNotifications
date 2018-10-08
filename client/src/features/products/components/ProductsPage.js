@@ -26,7 +26,7 @@ const ProductsPage = props => (
       />
       <Button icon="refresh" content="Refresh" onClick={props.getProducts} />
       <IfAuthenticated>
-        <Button content="New Product" onClick={props.goToCreateProductPage} />
+        <Button content="New Product" icon="add" onClick={props.goToCreateProductPage} />
       </IfAuthenticated>
     </Page.TopBar>
     <Page.Main>

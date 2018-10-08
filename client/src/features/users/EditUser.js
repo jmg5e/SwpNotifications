@@ -7,20 +7,15 @@ import auth from 'auth/selectors';
 import EditUserPage from './components/EditUserPage';
 import users from './selectors';
 
+// eslint-disable-next-line
 class EditUser extends Component {
-  componentWillMount() {
-    if (!this.props.user) {
-      this.props.goBack();
-    }
-  }
-
   render() {
     return (
       <EditUserPage
         user={this.props.user}
         updateUser={this.props.updateUser}
         goBack={this.props.goBack}
-        loggedInUser={this.props.loggedInUser}
+        currentUser={this.props.currentUser}
       />
     );
   }
@@ -28,7 +23,7 @@ class EditUser extends Component {
 
 EditUser.propTypes = {
   updateUser: PropTypes.func.isRequired,
-  loggedInUser: PropTypes.string.isRequired,
+  currentUser: PropTypes.string.isRequired,
   goBack: PropTypes.func.isRequired,
   user: PropTypes.shape({
     id: PropTypes.string,
@@ -39,7 +34,7 @@ EditUser.propTypes = {
 
 const mapStateToProps = (state, ownProps) => ({
   user: users.getById(state, ownProps),
-  loggedInUser: auth.getLoggedInUser(state),
+  currentUser: auth.getCurrentUserName(state),
 });
 
 const mapDispatchToProps = {

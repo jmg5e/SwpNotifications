@@ -4,6 +4,7 @@ import apiMiddleware from 'api/middleware';
 import createHistory from 'history/createBrowserHistory';
 import signalRMiddleware from 'signalR/middleware';
 import redirectMiddleware from 'routes/middleware';
+import notificationMiddleware from 'notifications/middleware';
 import storage from 'redux-persist/es/storage';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { persistCombineReducers, persistStore } from 'redux-persist';
@@ -25,10 +26,11 @@ const persistConfig = {
 
 const configureStore = () => {
   const middleware = [
-    routerMiddleware(history),
     apiMiddleware,
     signalRMiddleware,
     redirectMiddleware,
+    notificationMiddleware,
+    routerMiddleware(history),
   ];
 
   const reducers = {

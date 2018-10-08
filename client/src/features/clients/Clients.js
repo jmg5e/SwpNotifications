@@ -6,11 +6,11 @@ import {
 } from 'signalR/actions';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ClientsPage from './components/ClientsPage';
+import ClientList from './components/ClientList';
 import selector from './selectors';
 
 const Clients = props => (
-  <ClientsPage
+  <ClientList
     clients={props.clients}
     messageClient={props.messageClient}
     getConnectedClients={props.getConnectedClients}

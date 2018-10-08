@@ -5,9 +5,8 @@ import { Form, Button } from 'semantic-ui-react';
 import { isRequired, matchesPassword } from 'utils/validations';
 import FormField from 'components/FormField';
 
-
 const UserForm = ({
-  handleSubmit, loggedInUser, user, mode, handleCancel, valid,
+  handleSubmit, currentUser, user, mode, handleCancel, valid,
 }) => (
   <Form onSubmit={handleSubmit} size="large">
     <Field
@@ -25,26 +24,27 @@ const UserForm = ({
       as={Form.Checkbox}
       type="checkbox"
       label="Admin"
-      disabled={mode === 'edit' && loggedInUser === user.userName}
+      disabled={mode === 'edit' && currentUser === user.userName}
     />
-    <Field
-      name="hubGroups"
-      component="select"
-      type="select-multiple"
-      disabled={mode === 'edit' && loggedInUser === user.userName}
-      multiple
-    >
-      <option value="RequestListener">RequestListener</option>
-      <option value="ClientListener">ClientListener</option>
-    </Field>
     <Field
       name="isLocked"
       component={FormField}
       as={Form.Checkbox}
       type="checkbox"
       label="Account Locked"
-      disabled={mode === 'edit' && loggedInUser === user.userName}
+      disabled={mode === 'edit' && currentUser === user.userName}
     />
+    <Field
+      name="hubGroups"
+      component="select"
+      type="select-multiple"
+      disabled={mode === 'edit' && currentUser === user.userName}
+      multiple
+      style={{ color: 'red' }}
+    >
+      <option value="RequestListener">RequestListener</option>
+      <option value="ClientListener">ClientListener</option>
+    </Field>
     <Field
       name="password"
       id="password"
@@ -75,14 +75,22 @@ const UserForm = ({
   </Form>
 );
 
+UserForm.defaultProps = {
+  user: null,
+};
+
 UserForm.propTypes = {
   user: PropTypes.shape({
     userName: PropTypes.string,
-  }).isRequired,
+    id: PropTypes.string,
+    hubGroups: PropTypes.arrayOf(PropTypes.string),
+    isAdmin: PropTypes.bool,
+    isLocked: PropTypes.bool,
+  }),
   handleSubmit: PropTypes.func.isRequired,
   valid: PropTypes.bool.isRequired,
   mode: PropTypes.oneOf(['edit', 'create']).isRequired,
-  loggedInUser: PropTypes.string.isRequired,
+  currentUser: PropTypes.string.isRequired,
   handleCancel: PropTypes.func.isRequired,
 };
 

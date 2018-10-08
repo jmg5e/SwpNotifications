@@ -1,20 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-import Clients from 'features/clients/Clients';
+import Messages from 'features/messages/Messages';
 
 const Layout = styled.div`
   padding: 20px;
   display: grid;
-  grid-template-rows: 1fr 1fr;
-  width: 100%;
+  grid-template-rows: 1fr;
   row-gap: 10px;
+  width: 100%;
   height: 100%;
 `;
 
-const ClientsPage = () => (
+const MessagesPage = () => (
   <Layout>
-    <Clients />
+    <Messages />
   </Layout>
 );
 
-export default ClientsPage;
+export default MessagesPage;

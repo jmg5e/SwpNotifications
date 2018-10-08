@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import filterItemByValue from 'utils/filter';
 import { push } from 'react-router-redux';
 import { requestProduct } from 'signalR/actions';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import locations from 'features/locations/selectors';
 import { getProducts, deleteProduct } from 'api/actions/products';
-import products from './selectors';
+import { confirm } from 'features/confirm/actions';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import ProductsPage from './components/ProductsPage';
+import products from './selectors';
+
 
 class Products extends Component {
   state = {
@@ -22,6 +24,10 @@ class Products extends Component {
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  confirmProductDelete = (id) => {
+    this.props.confirm(() => this.props.deleteProduct(id), `Are You Sure you want to Delete Product:${id}`);
+  }
 
   goToProductPage = (product) => {
     this.props.push(`/products/${product.id}`);
@@ -41,7 +47,7 @@ class Products extends Component {
         getProducts={this.props.getProducts}
         locations={this.props.locations}
         requestProduct={this.props.requestProduct}
-        deleteProduct={this.props.deleteProduct}
+        deleteProduct={this.confirmProductDelete}
         products={this.props.products
           .filter(filterItemByValue(this.state.locationSelect, 'location'))
           .filter(filterItemByValue(this.state.searchValue, 'name'))}
@@ -53,6 +59,7 @@ class Products extends Component {
 Products.propTypes = {
   getProducts: PropTypes.func.isRequired,
   deleteProduct: PropTypes.func.isRequired,
+  confirm: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
   requestProduct: PropTypes.func.isRequired,
   locations: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -76,6 +83,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   getProducts,
   deleteProduct,
+  confirm,
   requestProduct,
   push,
 };

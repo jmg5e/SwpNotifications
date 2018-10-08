@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import RequestHistory from './RequestHistory';
-import ActiveRequests from './ActiveRequests';
+import RequestHistory from 'features/requests//RequestHistory';
+import ActiveRequests from 'features/requests/ActiveRequests';
 
 const Layout = styled.div`
   padding: 20px;
@@ -13,48 +13,12 @@ const Layout = styled.div`
   height: 100%;
 `;
 
-const RequestsPage = ({
-  activeRequests,
-  requestHistory,
-  getRequests,
-  dismissRequest,
-  clearRequests,
-  clearHistory,
-}) => (
+const RequestsPage = (
+) => (
   <Layout>
-    <ActiveRequests
-      className="ActiveRequests"
-      requests={activeRequests}
-      clearRequests={clearRequests}
-      getRequests={getRequests}
-      dismissRequest={dismissRequest}
-    />
-    <RequestHistory
-      requestHistory={requestHistory}
-      clearHistory={clearHistory}
-    />
+    <ActiveRequests />
+    <RequestHistory />
   </Layout>
 );
-
-RequestsPage.propTypes = {
-  activeRequests: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      product: PropTypes.object,
-      ellapsedTime: PropTypes.number,
-    }),
-  ).isRequired,
-  requestHistory: PropTypes.arrayOf(
-    PropTypes.shape({
-      eventId: PropTypes.string,
-      products: PropTypes.array,
-      timestamp: PropTypes.number,
-    }),
-  ).isRequired,
-  getRequests: PropTypes.func.isRequired,
-  dismissRequest: PropTypes.func.isRequired,
-  clearRequests: PropTypes.func.isRequired,
-  clearHistory: PropTypes.func.isRequired,
-};
 
 export default RequestsPage;
