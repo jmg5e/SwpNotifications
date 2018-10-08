@@ -6,7 +6,7 @@ export const signalrError = (label, errorMessage) => ({
   errorMessage,
 });
 
-export const connectToHub = (clientIdentifier = null) => ({
+export const connectToHub = clientIdentifier => ({
   type: Types.SIGNALR_CONNECT,
   clientIdentifier,
 });

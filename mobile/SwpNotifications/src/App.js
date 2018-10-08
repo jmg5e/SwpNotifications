@@ -8,7 +8,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import PushController from './notifications/PushController';
+// import PushController from './notifications/PushController';
 import { ConnectedNavigator } from './navigation/AppNavigator';
 import HardwareBackHandler from './navigation/HardwareBackHandler';
 

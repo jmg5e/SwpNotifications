@@ -24,18 +24,10 @@ class HardwareBackHandler extends React.Component<Props> {
   }
 
   onBackPress = () => {
-    // console.log(this.props.nav);
-    // console.log(getCurrentRoute(this.props.nav));
     const currentRoute = getCurrentRoute(this.props.nav);
     if (currentRoute !== 'locations' && currentRoute !== 'disconnected') {
       this.props.goBack();
     }
-    // if (
-    //   this.props.nav.index > 0
-    //   && getCurrentRoute(this.props.nav) !== 'locations'
-    // ) {
-    //   this.props.goBack();
-    // }
     return true;
   };
 

@@ -6,8 +6,8 @@ import * as Yup from 'yup';
 import InputField from '../../components/InputField';
 
 const validationSchema = Yup.object().shape({
-  // name: Yup.string().required('Required'),
-  name: Yup.string().nullable().notRequired(),
+  name: Yup.string().required('Required'),
+  // name: Yup.string().nullable().notRequired(),
 });
 
 type Props = {
@@ -26,6 +26,7 @@ const ConnectForm = (props: Props) => (
           <Button
             onPress={handleSubmit}
             title="Connect"
+            disabled={!isValid}
             raised
             containerStyle={{ marginVertical: 50 }}
           />
