@@ -4,8 +4,20 @@
       "Moniker": "600",
       "Floor": "pr1",
       "Products": [
-        {"Name": "7pk Sprite", "Slot": "1a"},
-        {"Name": "7pk Coke", "Slot": "1b"}
+        {"Name": "6pk Sprite", "Slot": "1a"},
+        {"Name": "6pk Coke", "Slot": "1b"},
+        {"Name": "12oz fridgepack Coke", "Slot": "2a"},
+        {"Name": "12oz fridgepack Diet Coke", "Slot": "2b"}
+      ]
+    },
+    {
+      "Moniker": "700",
+      "Floor": "pr1",
+      "Products": [
+        {"Name": "5Gal BIB Sprite", "Slot": "1a"},
+        {"Name": "6pk Diet Coke", "Slot": "2"},
+        {"Name": "1Liter Dasani", "Slot": "3"},
+        {"Name": "20Oz Fanta Grape", "Slot": "4"}
       ]
     },
     {
@@ -13,11 +25,15 @@
       "Floor": "pr2",
       "Products": [
         {"Name": "2Liter Sprite", "Slot": "1"},
-        {"Name": "2Liter Coke", "Slot": "2"}
+        {"Name": "2Liter Fanta Grape", "Slot": "2"},
+        {"Name": "20oz Dasani", "Slot": "3"},
+        {"Name": "2Liter Coke", "Slot": "4"}
       ]
     }
   ],
   "users": [
-      { "userName": "user", "password": "Passw0rd!", "email": "user@email.com", "hubGroups": ["RequestListener", "ClientListener"] }
+      { "userName": "user", "password": "Passw0rd!", "email": "user1@email.com", "hubGroups": ["RequestListener", "ClientListener"] },
+      { "userName": "operator", "password": "Passw0rd!", "email": "operator@email.com", "hubGroups": ["RequestListener", "ClientListener"] },
+      { "userName": "stocker", "password": "Passw0rd!", "email": "stocker@email.com", "hubGroups": ["RequestListener"] }
   ]
 }

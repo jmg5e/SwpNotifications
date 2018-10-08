@@ -1,7 +1,5 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
-using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -11,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 using SwpNotifications.Data;
 using SwpNotifications.Data.Entities;
 
@@ -58,11 +55,11 @@ namespace SwpNotifications.Api {
                     OnMessageReceived = context => {
                         var accessToken = context.Request.Query["access_token"];
 
-                        // If the request is for our hub...
+                        // If the request is for hub
                         var path = context.HttpContext.Request.Path;
                         if (!string.IsNullOrEmpty(accessToken) &&
                             (path.StartsWithSegments("/SwpHub"))) {
-                            // Read the token out of the query string
+                            // Read token from the query string
                             context.Token = accessToken;
                         }
                         return Task.CompletedTask;
@@ -124,17 +121,6 @@ namespace SwpNotifications.Api {
                 .ReverseMap();
                 cfg.CreateMap<ApplicationUser, Models.UserDto>()
                 .ReverseMap();
-                // .ForMember(
-                //         dest => dest.HubGroups,
-                //         opts => opts.ResolveUsing(
-                //             u => u.HubGroups.Select(g => g.ToFriendlyString()).ToArray()
-                //         )).ReverseMap();
-                // .ForMember(
-                //         dest => dest.LocationId,
-                //         opts => opts.MapFrom(src => src.Location))
-                // .ForMember(
-                //         dest => dest.Floor,
-                //         opts => opts.MapFrom(src => src.Location.Floor))
                 cfg.CreateMap<Request, Models.RequestDto>().ReverseMap();
             });
 
@@ -147,7 +133,6 @@ namespace SwpNotifications.Api {
             // {
             //     builder.AddFilter("Microsoft", LogLevel.Warning)
             //         .AddFilter("System", LogLevel.Warning)
-            //         .AddFilter("NToastNotify", LogLevel.Warning)
             //         .AddConsole();
             // });
         }

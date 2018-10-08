@@ -23,8 +23,8 @@ namespace SwpNotifications.Api {
             services.ConfigureCors();
             services.ConfigureAutomapper();
 
-            services.ConfigureInMemoryDb();
-            // services.ConfigureDataStore(Configuration);
+            // services.ConfigureInMemoryDb();
+            services.ConfigureDataStore(Configuration);
 
             services.ConfigureIdentity();
             services.ConfigureAuth(Configuration);
@@ -55,6 +55,7 @@ namespace SwpNotifications.Api {
             if (!env.IsProduction()) {
                 dbInitializer.SeedDataAsync().Wait();
             } else {
+                // HTTP Strict Transport Security(enforce ssl)
                 app.UseHsts();
             }
             app.UseCors("CorsPolicy");
@@ -62,7 +63,6 @@ namespace SwpNotifications.Api {
 
             app.UseHttpsRedirection();
             app.UseMvc();
-
 
             app.UseSignalR(route => {
                 route.MapHub<SwpHub>("/SwpHub");
