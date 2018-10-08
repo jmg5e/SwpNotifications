@@ -8,6 +8,7 @@ import users from 'features/users/reducer';
 import clients from 'features/clients/reducer';
 import messages from 'features/messages/reducer';
 import loading from 'api/reducer';
+import confirm from 'features/confirm/reducer';
 
 export default {
   auth,
@@ -20,4 +21,5 @@ export default {
   users,
   clients,
   messages,
+  confirm,
 };
