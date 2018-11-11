@@ -33,7 +33,8 @@
   ],
   "users": [
       { "userName": "user", "password": "Passw0rd!", "email": "user1@email.com", "hubGroups": ["RequestListener", "ClientListener"] },
-      { "userName": "operator", "password": "Passw0rd!", "email": "operator@email.com", "hubGroups": ["RequestListener", "ClientListener"] },
+      { "userName": "operator1", "password": "Passw0rd!", "email": "operator1@email.com", "hubGroups": ["RequestListener", "ClientListener"] },
+      { "userName": "operator2", "password": "Passw0rd!", "email": "operator2@email.com", "hubGroups": ["RequestListener", "ClientListener"] },
       { "userName": "stocker", "password": "Passw0rd!", "email": "stocker@email.com", "hubGroups": ["RequestListener"] }
   ]
 }
