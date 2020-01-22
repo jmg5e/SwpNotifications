@@ -20,7 +20,8 @@ namespace SwpNotifications.Api {
                 options.AddPolicy("CorsPolicy", builder => {
                     builder.AllowAnyHeader()
                     .AllowAnyMethod()
-                    .AllowAnyOrigin()
+                    // .AllowAnyOrigin()
+                    .WithOrigins("http://localhost:3000")
                     .AllowCredentials();
                 });
             });

@@ -56,12 +56,12 @@ namespace SwpNotifications.Api {
                 dbInitializer.SeedDataAsync().Wait();
             } else {
                 // HTTP Strict Transport Security(enforce ssl)
-                app.UseHsts();
+                // app.UseHsts();
             }
             app.UseCors("CorsPolicy");
             app.UseAuthentication();
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseMvc();
 
             app.UseSignalR(route => {
