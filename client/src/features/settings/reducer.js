@@ -1,7 +1,7 @@
 import Types from './types';
 
 export const initialState = {
-  server: '',
+  server: 'http://0.0.0.0:5000',
 };
 
 const settingsReducer = (state = initialState, action) => {
