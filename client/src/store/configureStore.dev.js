@@ -1,4 +1,3 @@
-/* eslint 'import/no-extraneous-dependencies': 0 */
 /* eslint-disable no-underscore-dangle */
 import apiMiddleware from 'api/middleware';
 import createHistory from 'history/createBrowserHistory';
